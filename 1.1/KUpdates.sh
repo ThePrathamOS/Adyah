@@ -107,10 +107,48 @@ if [ "$TOTAL" = "1234" ]; then
 	tar xf Kernel.tar.xz
 	cd Kernel
 	ls -l
-	#gdebi -n linux-modules-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
-	#gdebi -n linux-headers-4.16.12-041612_4.16.12-041612.201805251538_all.deb
-	#gdebi -n linux-headers-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
-	#gdebi -n linux-image-unsigned-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
+	sudo gdebi -n linux-modules-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
+	sudo gdebi -n linux-headers-4.16.12-041612_4.16.12-041612.201805251538_all.deb
+	sudo gdebi -n linux-headers-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
+	sudo gdebi -n linux-image-unsigned-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
+	CurrentUser=$(whoami)
+	CurrentKernelFull=$(uname -r)
+	CurrentKernel=$(uname -r | sed s.-generic.''.g)	
+echo "#!/bin/bash
+
+notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nRemoving Kernel $CurrentKernelFull...\"
+sudo apt-get remove -y linux-headers-$CurrentKernel
+sudo apt-get remove -y linux-headers-$CurrentKernelFull
+sudo apt-get remove -y linux-image-unsigned-$CurrentKernelFull
+sudo apt-get remove -y linux-modules-$CurrentKernelFull
+rm -Rf /usr/src/linux-headers-$CurrentKernel
+rm -Rf /usr/src/linux-headers-$CurrentKernelFull
+rm -Rf /lib/modules/$CurrentKernelFull
+notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nInstalling VMWare Modules...\"
+sudo vmware-modconfig --console --install-all
+notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nInstalling VirtualBox Modules...\"
+sudo dpkg-reconfigure virtualbox-dkms
+rm -f /home/$CurrentUser/.config/autostart/KernelPostRestart.desktop
+rm -f /opt/KernelPostRestart.sh
+notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nUpdating Grub...\"
+sudo update-grub
+
+" | tee /opt/KernelPostRestart.sh
+sudo chmod 777 /opt/KernelPostRestart.sh
+echo "[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=temp
+Comment=
+Exec=/opt/KernelPostRestart.sh
+OnlyShowIn=XFCE;
+StartupNotify=false
+Terminal=false
+Hidden=false
+" | tee /home/$CurrentUser/.config/autostart/KernelPostRestart.desktop
+	sudo update-grub
+	xfce4-session-logout -r
 else
 	echo "Unable To Connect Repository.Please Try Again Later."
 	exit
