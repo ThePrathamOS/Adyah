@@ -101,7 +101,17 @@ then
 	echo -n "4" >> FILES
 fi
 read -r TOTAL</opt/KernelUpdate/FILES
-echo $TOTAL
-#rm -f FILES
-#cat Kernel* > Kernel.tar.xz
-#tar xf Kernel.tar.xz
+rm -f FILES
+if [ "$TOTAL" = "1234" ]; then
+	cat Kernel* > Kernel.tar.xz
+	tar xf Kernel.tar.xz
+	cd Kernel
+	ls -l
+	#gdebi -n linux-modules-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
+	#gdebi -n linux-headers-4.16.12-041612_4.16.12-041612.201805251538_all.deb
+	#gdebi -n linux-headers-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
+	#gdebi -n linux-image-unsigned-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
+else
+	echo "Unable To Connect Repository.Please Try Again Later."
+	exit
+fi
