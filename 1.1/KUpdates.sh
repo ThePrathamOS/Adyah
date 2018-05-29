@@ -121,9 +121,9 @@ sudo apt-get remove -y linux-headers-$CurrentKernel
 sudo apt-get remove -y linux-headers-$CurrentKernelFull
 sudo apt-get remove -y linux-image-unsigned-$CurrentKernelFull
 sudo apt-get remove -y linux-modules-$CurrentKernelFull
-rm -Rf /usr/src/linux-headers-$CurrentKernel
-rm -Rf /usr/src/linux-headers-$CurrentKernelFull
-rm -Rf /lib/modules/$CurrentKernelFull
+sudo rm -Rf /usr/src/linux-headers-$CurrentKernel
+sudo rm -Rf /usr/src/linux-headers-$CurrentKernelFull
+sudo rm -Rf /lib/modules/$CurrentKernelFull
 notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nInstalling VMWare Modules...\"
 sudo vmware-modconfig --console --install-all
 notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nInstalling VirtualBox Modules...\"
