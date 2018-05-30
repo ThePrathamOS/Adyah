@@ -160,6 +160,7 @@ xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/works
 mpv /opt/anapmi/kerupdsuccess.mp3
 xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 echo \"Kernel Updated Successfully...\"
+rm -f /opt/KERNELUPDATE
 exit
 
 " | tee /opt/KernelPostRestart.sh
@@ -190,5 +191,6 @@ else
 	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 	echo "Unable To Connect Repository.Please Try Again Later."
 	rm -Rf /opt/KernelUpdate
+	rm -f /opt/KERNELUPDATE
 	exit
 fi
