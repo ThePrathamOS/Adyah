@@ -107,6 +107,11 @@ if [ "$TOTAL" = "1234" ]; then
 	tar xf Kernel.tar.xz
 	cd Kernel
 	ls -l
+	notify-send -t 5000 "PrathamOS Kernel Update" "\nInstalling Modules & Headers..."
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+	mpv /opt/anapmi/modheaders.mp3
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+	echo "Installing Modules & Headers..."
 	sudo gdebi -n linux-modules-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
 	sudo gdebi -n linux-headers-4.16.12-041612_4.16.12-041612.201805251538_all.deb
 	sudo gdebi -n linux-headers-4.16.12-041612-generic_4.16.12-041612.201805251538_amd64.deb
@@ -116,7 +121,11 @@ if [ "$TOTAL" = "1234" ]; then
 	CurrentKernel=$(uname -r | sed s.-generic.''.g)	
 echo "#!/bin/bash
 
-notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nRemoving Kernel $CurrentKernelFull...\"
+notify-send -t 5000 \"PrathamOS Kernel Update\" \"\nRemoving Kernel $CurrentKernelFull...\"
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+mpv /opt/anapmi/oldkernel.mp3
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+echo \"Removing Kernel $CurrentKernelFull...\"
 sudo apt-get remove -y linux-headers-$CurrentKernel
 sudo apt-get remove -y linux-headers-$CurrentKernelFull
 sudo apt-get remove -y linux-image-unsigned-$CurrentKernelFull
@@ -124,14 +133,34 @@ sudo apt-get remove -y linux-modules-$CurrentKernelFull
 sudo rm -Rf /usr/src/linux-headers-$CurrentKernel
 sudo rm -Rf /usr/src/linux-headers-$CurrentKernelFull
 sudo rm -Rf /lib/modules/$CurrentKernelFull
-notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nInstalling VMWare Modules...\"
+notify-send -t 5000 \"PrathamOS Kernel Update\" \"\nConfiguring VMWare Modules...\"
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+mpv /opt/anapmi/vmwaremod.mp3
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+echo \"Configuring VMWare Modules...\"
 sudo vmware-modconfig --console --install-all
-notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nInstalling VirtualBox Modules...\"
+notify-send -t 5000 \"PrathamOS Kernel Update\" \"\nConfiguring VirtualBox Modules...\"
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+mpv /opt/anapmi/vboxmod.mp3
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+echo \"Configuring VirtualBox Modules...\"
 sudo dpkg-reconfigure virtualbox-dkms
 rm -f /home/$CurrentUser/.config/autostart/KernelPostRestart.desktop
 rm -f /opt/KernelPostRestart.sh
-notify-send -t 5000 \"PrathamOS Kernel Sync\" \"\nUpdating Grub...\"
+rm -Rf /opt/KernelUpdate
+sed -i 's/$CurrentKernelFull/4.16.12-041612-generic/g' /opt/essentials/unsyncedupdates.html
+notify-send -t 5000 \"PrathamOS Kernel Update\" \"\nUpdating Grub...\"
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+mpv /opt/anapmi/updgrub.mp3
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+echo \"Updating Grub...\"
 sudo update-grub
+notify-send -t 5000 \"PrathamOS Kernel Update\" \"\nKernel Updated Successfully...\"
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+mpv /opt/anapmi/kerupdsuccess.mp3
+xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+echo \"Kernel Updated Successfully...\"
+exit
 
 " | tee /opt/KernelPostRestart.sh
 sudo chmod 777 /opt/KernelPostRestart.sh
@@ -147,9 +176,19 @@ StartupNotify=false
 Terminal=false
 Hidden=false
 " | tee /home/$CurrentUser/.config/autostart/KernelPostRestart.desktop
+	notify-send -t 5000 "PrathamOS Kernel Update" "\nRestarting The System..."
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+	mpv /opt/anapmi/restart2.mp3
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+	echo "Restarting The System..."
 	sudo update-grub
 	xfce4-session-logout -r
 else
+	notify-send -t 5000 "PrathamOS Kernel Update" "\nUnable To Connect Repository.\nPlease Try Again Later..."
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+	mpv /opt/anapmi/norepo.mp3
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 	echo "Unable To Connect Repository.Please Try Again Later."
+	rm -Rf /opt/KernelUpdate
 	exit
 fi
