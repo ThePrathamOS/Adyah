@@ -8,7 +8,7 @@ function Chunk1(){
 	then
 		FILESUCCESS="YES"
 	else
-		wget https://github.com/ThePrathamOS/Adyah/blob/master/1.1/Kernelaa
+		wget https://github.com/ThePrathamOS/Adyah/raw/master/1.1/Kernelaa
 		if [ -f "$FILE" ]
 		then
 			FILESUCCESS="YES"
@@ -27,7 +27,7 @@ function Chunk2(){
 	then
 		FILESUCCESS="YES"
 	else
-		wget https://github.com/ThePrathamOS/Adyah/blob/master/1.1/Kernelab
+		wget https://github.com/ThePrathamOS/Adyah/raw/master/1.1/Kernelab
 		if [ -f "$FILE" ]
 		then
 			FILESUCCESS="YES"
@@ -46,7 +46,7 @@ function Chunk3(){
 	then
 		FILESUCCESS="YES"
 	else
-		wget https://github.com/ThePrathamOS/Adyah/blob/master/1.1/Kernelac
+		wget https://github.com/ThePrathamOS/Adyah/raw/master/1.1/Kernelac
 		if [ -f "$FILE" ]
 		then
 			FILESUCCESS="YES"
@@ -65,7 +65,7 @@ function Chunk4(){
 	then
 		FILESUCCESS="YES"
 	else
-		wget https://github.com/ThePrathamOS/Adyah/blob/master/1.1/Kernelad
+		wget https://github.com/ThePrathamOS/Adyah/raw/master/1.1/Kernelad
 		if [ -f "$FILE" ]
 		then
 			FILESUCCESS="YES"
