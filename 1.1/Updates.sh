@@ -33,7 +33,7 @@ then
 else
 	rm -rf /opt/essentials/appimages/temp
 fi
-FILE="/opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-05-24-x86_64.AppImage"
+FILE="/opt/essentials/libreoffice/temp/LibreOfficeDev-6.2.0.0.alpha0_2018-05-24-x86_64.AppImage"
 if [ -f "$FILE" ]
 then
 	echo -n "2" >> FILES
@@ -92,7 +92,7 @@ else
 	mpv /opt/anapmi/norepo.mp3
 	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 	echo "Unable To Connect Repository.Please Try Again Later."
-	rm -Rf /opt/KernelUpdate
-	rm -f /opt/KERNELUPDATE
+	rm -Rf /opt/UnSyncedUpdate
+	rm -f /opt/POSUPDATE
 	exit
 fi
