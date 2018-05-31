@@ -96,3 +96,4 @@ else
 	rm -f /opt/POSUPDATE
 	exit
 fi
+
