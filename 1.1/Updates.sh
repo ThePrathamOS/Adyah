@@ -74,7 +74,7 @@ if [ "$TOTAL" = "12" ]; then
 
 	rm -Rf /opt/UnSyncedUpdate
 	rm -f /opt/POSUPDATE
-	echo "1.1" | tee /etc/apt/ver
+	sudo -H -u root bash -c 'echo "1.1" | tee /etc/apt/ver'
 
 	sudo kill $(ps -ef | grep bash | grep Notification | awk '{print $2}')
 	sudo kill $(ps -ef | grep yad | grep notification | awk '{print $2}')
