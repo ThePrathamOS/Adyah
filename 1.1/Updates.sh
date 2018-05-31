@@ -50,7 +50,7 @@ if [ "$TOTAL" = "12" ]; then
 	sed -i '4 s/^/#/' /opt/essentials/appimages/drawio.sh
 	sudo chmod 777 /opt/essentials/appimages/draw.io-x86_64-8.6.5.AppImage
 	echo -e "/opt/essentials/appimages/draw.io-x86_64-8.6.5.AppImage" >> /opt/essentials/appimages/drawio.sh
-	sed -i '73s~.*~<tr><td>Draw.io</td><td>8.6.5</td><td><a href="https://github.com/jgraph/drawio-desktop/releases" target=_blank>https://github.com/jgraph/drawio-desktop/releases</a></td></tr>~' /opt/unsyncedupdates.html
+	sed -i '73s~.*~<tr><td>Draw.io</td><td>8.6.5</td><td><a href="https://github.com/jgraph/drawio-desktop/releases" target=_blank>https://github.com/jgraph/drawio-desktop/releases</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 
 	rm -f /opt/essentials/libreoffice/LibreOffice*
 	mv /opt/essentials/libreoffice/temp/LibreOfficeDev-6.2.0.0.alpha0_2018-05-24-x86_64.AppImage /opt/essentials/libreoffice
@@ -70,7 +70,7 @@ if [ "$TOTAL" = "12" ]; then
 	echo -e "/opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-05-24-x86_64.AppImage --math" >> /opt/essentials/libreoffice/math.sh
 	echo -e "/opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-05-24-x86_64.AppImage" >> /opt/essentials/libreoffice/normal.sh
 	echo -e "/opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-05-24-x86_64.AppImage --writer" >> /opt/essentials/libreoffice/writer.sh
-	sed -i '83s~.*~<tr><td>LibreOffice</td><td>6.2.0.0.alpha0</td><td><a href="https://libreoffice.soluzioniopen.com/" target=_blank>https://libreoffice.soluzioniopen.com/</a></td></tr>~' /opt/unsyncedupdates.html
+	sed -i '83s~.*~<tr><td>LibreOffice</td><td>6.2.0.0.alpha0</td><td><a href="https://libreoffice.soluzioniopen.com/" target=_blank>https://libreoffice.soluzioniopen.com/</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 
 	rm -Rf /opt/UnSyncedUpdate
 	rm -f /opt/POSUPDATE
