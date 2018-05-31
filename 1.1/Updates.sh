@@ -76,6 +76,9 @@ if [ "$TOTAL" = "12" ]; then
 	rm -f /opt/POSUPDATE
 	echo "1.1" | tee /etc/apt/ver
 
+	sudo kill $(ps -ef | grep bash | grep Notification | awk '{print $2}')
+	sudo kill $(ps -ef | grep yad | grep notification | awk '{print $2}')
+
 	notify-send -t 5000 "PrathamOS UnSynced Update" "\nUnSynced Software Updated Successfully..."
 	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
 	mpv /opt/anapmi/unsyupdsuc.mp3
