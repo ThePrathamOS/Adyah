@@ -138,7 +138,9 @@ xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/works
 mpv /opt/anapmi/vmwaremod.mp3
 xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 echo \"Configuring VMWare Modules...\"
-sudo vmware-modconfig --console --install-all
+#sudo vmware-modconfig --console --install-all
+sudo vmware-installer -u vmware-workstation --console --required --eulas-agreed
+sudo /opt/essentials/VMware-Workstation-Full-14.1.1-7528167.x86_64.bundle --console --required --eulas-agreed
 notify-send -t 5000 \"PrathamOS Kernel Update\" \"\nConfiguring VirtualBox Modules...\"
 xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
 mpv /opt/anapmi/vboxmod.mp3
