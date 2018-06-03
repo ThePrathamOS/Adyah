@@ -22,7 +22,10 @@ then
 	if [ "$md5sum" = "fdcfa79462d7739782c1d8072e502d3e" ]; then
 		sudo 7z x UnSynced.7z -o.
 		sudo rm -f UnSynced.7z	
-
+		
+		sudo rm -Rf /opt/essentials/appimages/temp
+		sudo rm -Rf /opt/essentials/libreoffice/temp
+		
 		cd /opt/essentials/appimages
 		sudo mkdir temp
 		cd temp
@@ -36,7 +39,6 @@ then
 		cd ~
 
 		cd /opt/UnSyncedUpdate
-		sudo touch FILES
 
 		sudo rm -Rf /opt/essentials/calibre
 		sudo mkdir -p /opt/essentials/calibre/calibre
@@ -78,25 +80,7 @@ then
 		sudo rm -f /opt/essentials/zoom/zoom_amd64.deb
 		sed -i '71s~.*~<tr><td>Zoom</td><td>2.1.103753.0521</td><td><a href="https://zoom.us/download#client_4meeting" target=_blank>https://zoom.us/download#client_4meeting</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 
-		FILE="/opt/essentials/appimages/temp/draw.io-x86_64-8.6.5.AppImage"
-		if [ -f "$FILE" ]
-		then
-			sudo echo -n "1" >> FILES
-		else
-			sudo rm -rf /opt/essentials/appimages/temp
-		fi
-		
-		FILE="/opt/essentials/libreoffice/temp/LibreOfficeDev-6.2.0.0.alpha0_2018-06-01-x86_64.AppImage"
-		if [ -f "$FILE" ]
-		then
-			sudo echo -n "2" >> FILES
-		else
-			sudo rm -rf /opt/essentials/libreoffice/temp
-		fi
-
-		read -r TOTAL</opt/UnSyncedUpdate/FILES
-		sudo rm -f FILES
-
+		TOTAL="12"
 		if [ "$TOTAL" = "12" ]; then
 			sudo rm -f /opt/essentials/appimages/draw.io*
 			sudo mv /opt/essentials/appimages/temp/draw.io-x86_64-8.6.5.AppImage /opt/essentials/appimages
