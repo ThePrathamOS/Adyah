@@ -52,6 +52,8 @@ then
 		sudo chmod 777 -R /opt/essentials/calibre
 		sed -i '50s~.*~<tr><td>Calibre</td><td>3.25</td><td><a href="https://calibre-ebook.com/download_linux" target=_blank>https://calibre-ebook.com/download_linux</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 
+		sudo rm -Rf /opt/master-pdf-editor-4
+		sudo rm -Rf /opt/master-pdf-editor-5
 		sudo gdebi -n UnSynced/master-pdf-editor-5.0.15_qt5.amd64.deb
 		sudo ln -s /opt/master-pdf-editor-5 /opt/master-pdf-editor-4
 		sudo chmod 777 -R /opt/master-pdf-editor-5
@@ -79,7 +81,7 @@ then
 		FILE="/opt/essentials/appimages/temp/draw.io-x86_64-8.6.5.AppImage"
 		if [ -f "$FILE" ]
 		then
-			echo -n "1" >> FILES
+			sudo echo -n "1" >> FILES
 		else
 			sudo rm -rf /opt/essentials/appimages/temp
 		fi
@@ -87,7 +89,7 @@ then
 		FILE="/opt/essentials/libreoffice/temp/LibreOfficeDev-6.2.0.0.alpha0_2018-06-01-x86_64.AppImage"
 		if [ -f "$FILE" ]
 		then
-			echo -n "2" >> FILES
+			sudo echo -n "2" >> FILES
 		else
 			sudo rm -rf /opt/essentials/libreoffice/temp
 		fi
