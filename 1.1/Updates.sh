@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #executeorder66 bug
+#mimetypes
 #libreoffice
 #draw.io
 #zoom
@@ -109,6 +110,138 @@ then
 			sudo echo -e "/opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-06-01-x86_64.AppImage" >> /opt/essentials/libreoffice/normal.sh
 			sudo echo -e "/opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-06-01-x86_64.AppImage --writer" >> /opt/essentials/libreoffice/writer.sh
 			sed -i '83s~.*~<tr><td>LibreOffice</td><td>6.2.0.0.alpha0</td><td><a href="https://libreoffice.soluzioniopen.com/" target=_blank>https://libreoffice.soluzioniopen.com/</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+			sudo rm -f /usr/bin/office
+			sudo ln -s /opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-06-01-x86_64.AppImage /usr/bin/office
+			sudo sed -i '24i/usr/bin/office' /opt/essentials/prathamos
+
+			CURUSER=$(whoami)
+			UUID=$(uuidgen) && A=${UUID:0:6} && echo $A
+			UUID=$(uuidgen) && B=${UUID:0:6} && echo $B
+			UUID=$(uuidgen) && C=${UUID:0:6} && echo $C
+			UUID=$(uuidgen) && D=${UUID:0:6} && echo $D
+			UUID=$(uuidgen) && E=${UUID:0:6} && echo $E
+			UUID=$(uuidgen) && F=${UUID:0:6} && echo $F
+			rm -f /home/$CURUSER/.local/share/applications/*Office*
+			rm -f /home/$CURUSER/.local/share/applications/*office*
+			echo "[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=office %f
+Name=userapp-Libre-Office-"$A".desktop
+Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$A".desktop
+			echo "[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=office %f
+Name=userapp-Libre-Office-"$B".desktop
+Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$B".desktop
+			echo "[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=office %f
+Name=userapp-Libre-Office-"$C".desktop
+Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$C".desktop
+			echo "[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=office %f
+Name=userapp-Libre-Office-"$D".desktop
+Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$D".desktop
+			echo "[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=office %f
+Name=userapp-office-"$E".desktop
+Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applications/userapp-office-"$E".desktop
+			echo "[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+NoDisplay=true
+Exec=office %f
+Name=userapp-office-"$F".desktop
+Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applications/userapp-office-"$F".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$A".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$B".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$C".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$D".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$E".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$F".desktop
+			rm -f /home/$CURUSER/.config/mimeapps.list
+			MIMEFILE="/opt/newuserbase/mimebase"
+			if [ -f "$MIMEFILE" ]
+				cp /opt/newuserbase/mimebase /home/$CURUSER/.config/mimeapps.list
+			else
+				cp /opt/newuserbase/.config/mimeapps.list /home/$CURUSER/.config/mimeapps.list
+				sudo cp /opt/newuserbase/.config/mimeapps.list /opt/newuserbase/mimebase
+			fi
+			chmod 644 /home/$CURUSER/.config/mimeapps.list
+			sed -i '6s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '10s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '11s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '12s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '13s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '20s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '21s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '22s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i '23s~.*~~' /home/$CURUSER/.config/mimeapps.list
+			sed -i "s/FoxitReader/Acrobat/g" /home/$CURUSER/.config/mimeapps.list
+			echo -e "image/jpg=ristretto.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "image/jpeg=ristretto.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "image/gif=ristretto.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/vnd.oasis.opendocument.graphics=userapp-Libre-Office-$A.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/vnd.oasis.opendocument.presentation=userapp-Libre-Office-$B.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/vnd.oasis.opendocument.spreadsheet=userapp-Libre-Office-$C.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/vnd.oasis.opendocument.text=userapp-Libre-Office-$D.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/vnd.oasis.opendocument.database=userapp-office-$E.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/vnd.oasis.opendocument.formula=userapp-office-$F.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/3gpp=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/x-msvideo=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/x-flv=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/mp4=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/x-matroska=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/quicktime=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/mpeg=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/mp2t=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/webm=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/x-ms-wmv=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/aac=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/x-aiff=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/AMR=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/flac=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/mpeg=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/x-vorbis+ogg=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/x-wav=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/x-ms-wma=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/x-riff=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/mp4=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/mp2=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "audio/x-flac+ogg=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "video/ogg=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/zip=org.gnome.FileRoller.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/vnd.adobe.flash.movie=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
+
+			sudo rm -f /opt/newuserbase/.local/share/applications/*Office*	
+			sudo rm -f /opt/newuserbase/.local/share/applications/*office*	
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$A".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$B".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$C".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$D".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$E".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$F".desktop /opt/newuserbase/.local/share/applications
+			sudo rm -f /opt/newuserbase/.config/mimeapps.list		
+			sudo cp /home/$CURUSER/.config/mimeapps.list /opt/newuserbase/.config/mimeapps.list
+			sudo chmod 777 -R /opt/newuserbase
 
 			sudo chmod 777 -R /opt/essentials/libreoffice
 			sudo chmod 777 -R /opt/essentials/appimages
