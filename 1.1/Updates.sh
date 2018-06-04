@@ -180,6 +180,7 @@ Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applicat
 			rm -f /home/$CURUSER/.config/mimeapps.list
 			MIMEFILE="/opt/newuserbase/mimebase"
 			if [ -f "$MIMEFILE" ]
+			then
 				cp /opt/newuserbase/mimebase /home/$CURUSER/.config/mimeapps.list
 			else
 				cp /opt/newuserbase/.config/mimeapps.list /home/$CURUSER/.config/mimeapps.list
