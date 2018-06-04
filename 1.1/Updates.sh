@@ -115,12 +115,12 @@ then
 			sudo sed -i '24i/usr/bin/office' /opt/essentials/prathamos
 
 			CURUSER=$(whoami)
-			UUID=$(uuidgen) && A=${UUID:0:6} && echo $A
-			UUID=$(uuidgen) && B=${UUID:0:6} && echo $B
-			UUID=$(uuidgen) && C=${UUID:0:6} && echo $C
-			UUID=$(uuidgen) && D=${UUID:0:6} && echo $D
-			UUID=$(uuidgen) && E=${UUID:0:6} && echo $E
-			UUID=$(uuidgen) && F=${UUID:0:6} && echo $F
+			UUID=$(uuidgen) && A=${UUID:0:6}
+			UUID=$(uuidgen) && B=${UUID:0:6}
+			UUID=$(uuidgen) && C=${UUID:0:6}
+			UUID=$(uuidgen) && D=${UUID:0:6}
+			UUID=$(uuidgen) && E=${UUID:0:6}
+			UUID=$(uuidgen) && F=${UUID:0:6}
 			rm -f /home/$CURUSER/.local/share/applications/*Office*
 			rm -f /home/$CURUSER/.local/share/applications/*office*
 			echo "[Desktop Entry]
@@ -171,10 +171,10 @@ NoDisplay=true
 Exec=office %f
 Name=userapp-office-"$F".desktop
 Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applications/userapp-office-"$F".desktop
-			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$A".desktop
-			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$B".desktop
-			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$C".desktop
-			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$D".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$A".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$B".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$C".desktop
+			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$D".desktop
 			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$E".desktop
 			chmod 644 -R /home/$CURUSER/.local/share/applications/userapp-office-"$F".desktop
 			rm -f /home/$CURUSER/.config/mimeapps.list
@@ -234,10 +234,10 @@ Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applicat
 
 			sudo rm -f /opt/newuserbase/.local/share/applications/*Office*	
 			sudo rm -f /opt/newuserbase/.local/share/applications/*office*	
-			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$A".desktop /opt/newuserbase/.local/share/applications
-			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$B".desktop /opt/newuserbase/.local/share/applications
-			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$C".desktop /opt/newuserbase/.local/share/applications
-			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$D".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$A".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$B".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$C".desktop /opt/newuserbase/.local/share/applications
+			sudo cp /home/$CURUSER/.local/share/applications/userapp-Libre-Office-"$D".desktop /opt/newuserbase/.local/share/applications
 			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$E".desktop /opt/newuserbase/.local/share/applications
 			sudo cp /home/$CURUSER/.local/share/applications/userapp-office-"$F".desktop /opt/newuserbase/.local/share/applications
 			sudo rm -f /opt/newuserbase/.config/mimeapps.list		
