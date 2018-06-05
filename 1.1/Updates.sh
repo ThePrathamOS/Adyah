@@ -12,8 +12,31 @@ sed -i '74s~.*~~' /opt/essentials/PrathamOSUpGradeFull.sh
 sed -i '74s~.*~sudo service network-manager restart \&\& sleep 30~' /opt/essentials/PrathamOSUpGradeFull.sh
 
 cd /opt/UnSyncedUpdate
-axel -n 10 https://sourceforge.net/projects/getprathamos/files/Adyah/1.1/UnSynced.7z
 
+axel https://sourceforge.net/projects/getprathamos/files/Adyah/PackInstaller.sh
+FILE2="/opt/UnSyncedUpdate/PackInstaller.sh"
+
+if [ -f "$FILE2" ]
+then
+	sudo rm -Rf /opt/prathamos-install
+	sudo mkdir /opt/prathamos-install
+	sudo cp /opt/UnSyncedUpdate/PackInstaller.sh /opt/prathamos-install
+	sudo rm -f /usr/bin/prathamos-install
+	sudo ln -s /opt/prathamos-install/PackInstaller.sh /usr/bin/prathamos-install
+	sudo chown -R root:root /opt/prathamos-install 
+	sudo chmod 777 -R /opt/prathamos-install
+else
+	notify-send -t 5000 "PrathamOS UnSynced Update" "\nUnable To Connect Repository.\nPlease Try Again Later..."
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
+	mpv /opt/anapmi/norepo.mp3
+	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
+	echo "Unable To Connect Repository.Please Try Again Later."
+	sudo rm -Rf /opt/UnSyncedUpdate
+	sudo rm -f /opt/POSUPDATE
+	exit
+fi
+
+axel -n 10 https://sourceforge.net/projects/getprathamos/files/Adyah/1.1/UnSynced.7z
 FILE="/opt/UnSyncedUpdate/UnSynced.7z"
 
 if [ -f "$FILE" ]
@@ -113,6 +136,7 @@ then
 			sudo rm -f /usr/bin/office
 			sudo ln -s /opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-06-01-x86_64.AppImage /usr/bin/office
 			sudo sed -i '24i/usr/bin/office' /opt/essentials/prathamos
+			sudo sed -i '18i/usr/bin/prathamos-install' /opt/essentials/prathamos
 
 			CURUSER=$(whoami)
 			UUID=$(uuidgen) && A=${UUID:0:6}
@@ -230,6 +254,9 @@ Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applicat
 			echo -e "audio/x-flac+ogg=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
 			echo -e "video/ogg=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
 			echo -e "application/zip=org.gnome.FileRoller.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/x-compressed-tar=org.gnome.FileRoller.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/x-tar=org.gnome.FileRoller.desktop" >> /home/$CURUSER/.config/mimeapps.list
+			echo -e "application/x-xz-compressed-tar=org.gnome.FileRoller.desktop" >> /home/$CURUSER/.config/mimeapps.list
 			echo -e "application/vnd.adobe.flash.movie=vlc.desktop" >> /home/$CURUSER/.config/mimeapps.list
 
 			sudo rm -f /opt/newuserbase/.local/share/applications/*Office*	
@@ -246,6 +273,11 @@ Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applicat
 
 			sudo chmod 777 -R /opt/essentials/libreoffice
 			sudo chmod 777 -R /opt/essentials/appimages
+
+			sed -i '26s~.*~<tr><td>Anaconda</td><td>3-5.2.0-Linux-x86_64</td><td><a href="https://www.anaconda.com/download/#linux" target=_blank>https://www.anaconda.com/download/#linux</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+			sed -i '38s~.*~<tr><td>PyCharm</td><td>2018.1.4</td><td><a href="https://www.jetbrains.com/pycharm/download/#section=linux" target=_blank>https://www.jetbrains.com/pycharm/download/#section=linux</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+			sed -i '31s~.*~<tr><td>.Net Core</td><td>2.1.300</td><td><a href="https://www.microsoft.com/net/download/linux" target=_blank>https://www.microsoft.com/net/download/linux</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+			sed -i '39s~.*~<tr><td>RStudio</td><td>1.1.453</td><td><a href='https://www.rstudio.com/products/rstudio/download/#download' target=_blank>https://www.rstudio.com/products/rstudio/download/#download</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 
 			sudo rm -Rf /opt/UnSyncedUpdate
 			sudo rm -f /opt/POSUPDATE
@@ -291,3 +323,4 @@ else
 	sudo rm -f /opt/POSUPDATE
 	exit
 fi
+
