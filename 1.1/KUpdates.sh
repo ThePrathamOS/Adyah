@@ -112,10 +112,10 @@ if [ "$TOTAL" = "1234" ]; then
 	mpv /opt/anapmi/modheaders.mp3
 	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 	echo "Installing Modules & Headers..."
-	sudo gdebi -n linux-modules-4.16.13-041613-generic_4.16.13-041613.201805300810_amd64.deb
-	sudo gdebi -n linux-headers-4.16.13-041613_4.16.13-041613.201805300810_all.deb
-	sudo gdebi -n linux-headers-4.16.13-041613-generic_4.16.13-041613.201805300810_amd64.deb
-	sudo gdebi -n linux-image-unsigned-4.16.13-041613-generic_4.16.13-041613.201805300810_amd64.deb
+	sudo gdebi -n linux-modules-4.16.14-041614-generic_4.16.14-041614.201806051643_amd64.deb
+	sudo gdebi -n linux-headers-4.16.14-041614_4.16.14-041614.201806051643_all.deb
+	sudo gdebi -n linux-headers-4.16.14-041614-generic_4.16.14-041614.201806051643_amd64.deb
+	sudo gdebi -n linux-image-unsigned-4.16.14-041614-generic_4.16.14-041614.201806051643_amd64.deb
 	CurrentUser=$(whoami)
 	CurrentKernelFull=$(uname -r)
 	CurrentKernel=$(uname -r | sed s.-generic.''.g)	
@@ -150,7 +150,7 @@ sudo dpkg-reconfigure virtualbox-dkms
 rm -f /home/$CurrentUser/.config/autostart/KernelPostRestart.desktop
 rm -f /opt/KernelPostRestart.sh
 rm -Rf /opt/KernelUpdate
-sed -i 's/$CurrentKernelFull/4.16.13-041613-generic/g' /opt/essentials/unsyncedupdates.html
+sed -i 's/$CurrentKernelFull/4.16.14-041614-generic/g' /opt/essentials/unsyncedupdates.html
 notify-send -t 5000 \"PrathamOS Kernel Update\" \"\nUpdating Grub...\"
 xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
 mpv /opt/anapmi/updgrub.mp3
