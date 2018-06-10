@@ -34,8 +34,7 @@ sudo -H -u root bash -c 'source /opt/anaconda3/bin/activate root && conda update
 
 sudo rm -f GetPOS.sh
 axel https://sourceforge.net/projects/getprathamos/files/Adyah/GetPOS.sh
-FILE=\"GetPOS.sh\"
-if [ -f \"$FILE\" ]
+if [ -f \"GetPOS.sh\" ]
 then
 	sudo chmod 777 GetPOS.sh
 	./GetPOS.sh
