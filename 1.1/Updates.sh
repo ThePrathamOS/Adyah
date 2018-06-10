@@ -25,6 +25,28 @@ then
 	sudo ln -s /opt/prathamos-install/PackInstaller.sh /usr/bin/prathamos-install
 	sudo chown -R root:root /opt/prathamos-install 
 	sudo chmod 777 -R /opt/prathamos-install
+	echo "#!/bin/bash
+
+sudo -H -u root bash -c 'source /opt/anaconda3/bin/activate root && conda update --all -y && conda clean --all -y'" | sudo tee /opt/essentials/RefreshAnaconda.sh
+	sudo ln -s /opt/essentials/RefreshAnaconda.sh /usr/bin/updateconda
+	sudo chmod 777 /opt/essentials/RefreshAnaconda.sh
+	echo "#!/bin/bash
+
+sudo rm -f GetPOS.sh
+axel https://sourceforge.net/projects/getprathamos/files/Adyah/GetPOS.sh
+FILE=\"GetPOS.sh\"
+if [ -f \"$FILE\" ]
+then
+	sudo chmod 777 GetPOS.sh
+	./GetPOS.sh
+	sudo rm -f GetPOS.sh
+	exit
+else
+	exit
+fi
+" | sudo tee /opt/essentials/GetPrathamOS.sh
+	sudo ln -s /opt/essentials/GetPrathamOS.sh /usr/bin/prathamos-get
+	sudo chmod 777 /opt/essentials/GetPrathamOS.sh
 else
 	notify-send -t 5000 "PrathamOS UnSynced Update" "\nUnable To Connect Repository.\nPlease Try Again Later..."
 	xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
@@ -137,6 +159,8 @@ then
 			sudo ln -s /opt/essentials/libreoffice/LibreOfficeDev-6.2.0.0.alpha0_2018-06-01-x86_64.AppImage /usr/bin/office
 			sudo sed -i '24i/usr/bin/office' /opt/essentials/prathamos
 			sudo sed -i '18i/usr/bin/prathamos-install' /opt/essentials/prathamos
+			sudo sed -i '117i/usr/bin/updateconda' /opt/essentials/prathamos
+			sudo sed -i '18i/usr/bin/prathamos-get' /opt/essentials/prathamos
 
 			CURUSER=$(whoami)
 			UUID=$(uuidgen) && A=${UUID:0:6}
