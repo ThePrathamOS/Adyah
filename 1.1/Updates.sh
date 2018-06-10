@@ -36,7 +36,7 @@ else
 	exit
 fi
 
-axel -n 10 https://sourceforge.net/projects/getprathamos/files/Adyah/1.1/UnSynced.7z
+axel -n 50 https://sourceforge.net/projects/getprathamos/files/Adyah/1.1/UnSynced.7z
 FILE="/opt/UnSyncedUpdate/UnSynced.7z"
 
 if [ -f "$FILE" ]
@@ -323,4 +323,3 @@ else
 	sudo rm -f /opt/POSUPDATE
 	exit
 fi
-
