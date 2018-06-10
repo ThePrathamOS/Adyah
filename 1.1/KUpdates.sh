@@ -147,6 +147,7 @@ mpv /opt/anapmi/vboxmod.mp3
 xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 echo \"Configuring VirtualBox Modules...\"
 sudo dpkg-reconfigure virtualbox-dkms
+sudo rm -f /*.old
 rm -f /home/$CurrentUser/.config/autostart/KernelPostRestart.desktop
 rm -f /opt/KernelPostRestart.sh
 rm -Rf /opt/KernelUpdate
