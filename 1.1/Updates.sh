@@ -7,6 +7,10 @@
 #zoom
 #masterpdf
 #calibre
+#prathamos-install
+#updateconda
+#prathamos-get
+#oracle & open java 10
 
 sed -i '74s~.*~~' /opt/essentials/PrathamOSUpGradeFull.sh
 sed -i '74s~.*~sudo service network-manager restart \&\& sleep 30~' /opt/essentials/PrathamOSUpGradeFull.sh
@@ -64,7 +68,7 @@ if [ -f "$FILE" ]
 then
 	md5sum=$(md5sum $FILE | awk '{print $1}')
 
-	if [ "$md5sum" = "fdcfa79462d7739782c1d8072e502d3e" ]; then
+	if [ "$md5sum" = "f303ec0be0679062c8d52caf52cab20a" ]; then
 		sudo 7z x UnSynced.7z -o.
 		sudo rm -f UnSynced.7z	
 		
@@ -160,7 +164,9 @@ then
 			sudo sed -i '18i/usr/bin/prathamos-install' /opt/essentials/prathamos
 			sudo sed -i '117i/usr/bin/updateconda' /opt/essentials/prathamos
 			sudo sed -i '18i/usr/bin/prathamos-get' /opt/essentials/prathamos
-
+			sudo sed -i '112i/usr/bin/setupopenjdk10' /opt/essentials/prathamos
+			sudo sed -i '114i/usr/bin/setuporaclejdk10' /opt/essentials/prathamos
+			
 			CURUSER=$(whoami)
 			UUID=$(uuidgen) && A=${UUID:0:6}
 			UUID=$(uuidgen) && B=${UUID:0:6}
@@ -301,6 +307,29 @@ Comment=Custom definition for office" | tee /home/$CURUSER/.local/share/applicat
 			sed -i '38s~.*~<tr><td>PyCharm</td><td>2018.1.4</td><td><a href="https://www.jetbrains.com/pycharm/download/#section=linux" target=_blank>https://www.jetbrains.com/pycharm/download/#section=linux</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 			sed -i '31s~.*~<tr><td>.Net Core</td><td>2.1.300</td><td><a href="https://www.microsoft.com/net/download/linux" target=_blank>https://www.microsoft.com/net/download/linux</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 			sed -i '39s~.*~<tr><td>RStudio</td><td>1.1.453</td><td><a href='https://www.rstudio.com/products/rstudio/download/#download' target=_blank>https://www.rstudio.com/products/rstudio/download/#download</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+			sed -i '28s~.*~~' /opt/essentials/unsyncedupdates.html
+			sed -i '28s~.*~<tr><td>OpenJDK</td><td>10.0.1</td><td><a href="http://jdk.java.net/10/" target=_blank>http://jdk.java.net/10/</a></td></tr><tr><td>Oracle Java</td><td>8u172 / 10.0.1</td><td><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target=_blank>http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+
+			sudo rm -f /opt/java/setupopenjdk.sh
+			sudo rm -f /opt/java/setupopenjdk10.sh
+			sudo rm -f /opt/java/setuporaclejdk.sh
+			sudo rm -f /opt/java/setuporaclejdk10.sh
+			sudo rm -f /usr/bin/setupopenjdk
+			sudo rm -f /usr/bin/setupopenjdk10
+			sudo rm -f /usr/bin/setuporaclejdk
+			sudo rm -f /usr/bin/setuporaclejdk10
+			sudo cp /opt/UnSyncedUpdate/UnSynced/setupopenjdk.sh /opt/java/setupopenjdk.sh
+			sudo cp /opt/UnSyncedUpdate/UnSynced/setupopenjdk10.sh /opt/java/setupopenjdk10.sh
+			sudo cp /opt/UnSyncedUpdate/UnSynced/setuporaclejdk.sh /opt/java/setuporaclejdk.sh
+			sudo cp /opt/UnSyncedUpdate/UnSynced/setuporaclejdk10.sh /opt/java/setuporaclejdk10.sh
+			sudo chmod 777 /opt/java/setupopenjdk.sh
+			sudo chmod 777 /opt/java/setupopenjdk10.sh
+			sudo chmod 777 /opt/java/setuporaclejdk.sh
+			sudo chmod 777 /opt/java/setuporaclejdk10.sh
+			sudo ln -s /opt/java/setupopenjdk.sh /usr/bin/setupopenjdk
+			sudo ln -s /opt/java/setupopenjdk10.sh /usr/bin/setupopenjdk10
+			sudo ln -s /opt/java/setuporaclejdk.sh /usr/bin/setuporaclejdk
+			sudo ln -s /opt/java/setuporaclejdk10.sh /usr/bin/setuporaclejdk10
 
 			sudo rm -Rf /opt/UnSyncedUpdate
 			sudo rm -f /opt/POSUPDATE
