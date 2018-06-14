@@ -70,7 +70,7 @@ if [ -f "$FILE" ]
 then
 	md5sum=$(md5sum $FILE | awk '{print $1}')
 
-	if [ "$md5sum" = "44e44ea306cb379d3718ecfd815a7a43" ]; then
+	if [ "$md5sum" = "27796c6300e75f755f914ab2689580c4" ]; then
 		sudo 7z x UnSynced.7z -o.
 		sudo rm -f UnSynced.7z	
 		
