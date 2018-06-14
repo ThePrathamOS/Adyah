@@ -7,6 +7,8 @@
 #zoom
 #masterpdf
 #calibre
+#freefilesync
+#syncthing
 #prathamos-install
 #updateconda
 #prathamos-get
@@ -68,7 +70,7 @@ if [ -f "$FILE" ]
 then
 	md5sum=$(md5sum $FILE | awk '{print $1}')
 
-	if [ "$md5sum" = "f303ec0be0679062c8d52caf52cab20a" ]; then
+	if [ "$md5sum" = "44e44ea306cb379d3718ecfd815a7a43" ]; then
 		sudo 7z x UnSynced.7z -o.
 		sudo rm -f UnSynced.7z	
 		
@@ -102,6 +104,18 @@ then
 /opt/essentials/calibre/calibre/calibre' | sudo tee /opt/essentials/calibre/calibre.sh
 		sudo chmod 777 -R /opt/essentials/calibre
 		sed -i '50s~.*~<tr><td>Calibre</td><td>3.25</td><td><a href="https://calibre-ebook.com/download_linux" target=_blank>https://calibre-ebook.com/download_linux</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+
+		sudo rm -Rf /opt/essentials/freefilesync
+		sudo mv UnSynced/freefilesync /opt/essentials
+		sudo chmod 777 -R /opt/essentials/freefilesync
+		sed -i '56s~.*~<tr><td>FreeFileSync</td><td>10.1</td><td><a href='https://freefilesync.org/download.php' target=_blank>https://freefilesync.org/download.php</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+
+		sudo rm -Rf /opt/essentials/syncthing
+		sudo mv UnSynced/syncthing /opt/essentials
+		sed -i '63s~.*~<tr><td>Syncthing</td><td>Core - v0.14.49-rc.1 / GUI - 0.9.4</td><td><a href='https://syncthing.net/' target=_blank>https://syncthing.net/</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+		sudo rm -f /usr/bin/syncthing
+		sudo ln -s /opt/essentials/syncthing/core/syncthing /usr/bin/syncthing
+		sudo chmod 777 -R /opt/essentials/syncthing
 
 		sudo rm -Rf /opt/master-pdf-editor-4
 		sudo rm -Rf /opt/master-pdf-editor-5
@@ -375,3 +389,4 @@ else
 	sudo rm -f /opt/POSUPDATE
 	exit
 fi
+
