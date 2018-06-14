@@ -119,13 +119,13 @@ then
 
 		sudo rm -Rf /opt/master-pdf-editor-4
 		sudo rm -Rf /opt/master-pdf-editor-5
-		sudo gdebi -n UnSynced/master-pdf-editor-5.0.15_qt5.amd64.deb
+		sudo gdebi -n UnSynced/master-pdf-editor-5.0.23_qt5.amd64.deb
 		sudo ln -s /opt/master-pdf-editor-5 /opt/master-pdf-editor-4
 		sudo chmod 777 -R /opt/master-pdf-editor-5
 		sudo chmod 777 -R /opt/master-pdf-editor-4
 		sudo ln -s /opt/master-pdf-editor-5/masterpdfeditor5 /opt/master-pdf-editor-4/masterpdfeditor4
 		sudo ln -s /opt/master-pdf-editor-5/masterpdfeditor5.png /opt/master-pdf-editor-4/masterpdfeditor4.png
-		sed -i '55s~.*~<tr><td>Master Pdf Editor</td><td>5.0.15</td><td><a href="https://code-industry.net/free-pdf-editor/#get" target=_blank>https://code-industry.net/free-pdf-editor/#get</a></td></tr>~' /opt/essentials/unsyncedupdates.html
+		sed -i '55s~.*~<tr><td>Master Pdf Editor</td><td>5.0.23</td><td><a href="https://code-industry.net/free-pdf-editor/#get" target=_blank>https://code-industry.net/free-pdf-editor/#get</a></td></tr>~' /opt/essentials/unsyncedupdates.html
 
 		sudo rm -Rf /opt/essentials/zoom
 		sudo mkdir /opt/essentials/zoom
@@ -389,4 +389,3 @@ else
 	sudo rm -f /opt/POSUPDATE
 	exit
 fi
-
