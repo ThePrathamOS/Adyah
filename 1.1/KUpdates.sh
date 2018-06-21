@@ -5,7 +5,7 @@ FILE="/opt/KernelUpdate/Kernel.7z"
 if [ -f "$FILE" ]
 then
 	md5sum=$(md5sum $FILE | awk '{print $1}')
-	if [ "$md5sum" = "73fb0cf3692eba6504bf12d98966fcec" ]; then
+	if [ "$md5sum" = "73dcb46b2fe896a299359e31d9a3301b" ]; then
 		TOTAL="1234"
 		if [ "$TOTAL" = "1234" ]; then
 			sudo 7z x Kernel.7z -o.
@@ -17,23 +17,23 @@ then
 			sudo chown -R root:root /opt/drivers
 			sudo chmod -R 777 /opt/drivers
 			sudo cp -R /opt/drivers/rtl8188eu /opt/drivers/rtl8188eutemp
+			sudo chmod -R 777 /opt/drivers/rtl8188eutemp
 			pushd /opt/drivers/rtl8188eutemp
 			make
 			sudo make install
 			sudo modprobe 8188eu
 			popd
 			sudo rm -Rf /opt/drivers/rtl8188eutemp
-
 			notify-send -t 5000 "PrathamOS Kernel Update" "\nInstalling Modules & Headers..."
 			xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
 			mpv /opt/anapmi/modheaders.mp3
 			xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 			echo "Installing Modules & Headers..."
-			KERNELNAME="4.18.0-041800rc1-generic"
-			sudo gdebi -n linux-modules-4.18.0-041800rc1-generic_4.18.0-041800rc1.201806162031_amd64.deb
-			sudo gdebi -n linux-headers-4.18.0-041800rc1_4.18.0-041800rc1.201806162031_all.deb
-			sudo gdebi -n linux-headers-4.18.0-041800rc1-generic_4.18.0-041800rc1.201806162031_amd64.deb
-			sudo gdebi -n linux-image-unsigned-4.18.0-041800rc1-generic_4.18.0-041800rc1.201806162031_amd64.deb
+			KERNELNAME="4.17.2-041702-generic"
+			sudo gdebi -n linux-modules-4.17.2-041702-generic_4.17.2-041702.201806160433_amd64.deb
+			sudo gdebi -n linux-headers-4.17.2-041702_4.17.2-041702.201806160433_all.deb
+			sudo gdebi -n linux-headers-4.17.2-041702-generic_4.17.2-041702.201806160433_amd64.deb
+			sudo gdebi -n linux-image-unsigned-4.17.2-041702-generic_4.17.2-041702.201806160433_amd64.deb
 			CurrentUser=$(whoami)
 			CurrentKernelFull=$(uname -r)
 			CurrentKernel=$(uname -r | sed s.-generic.''.g)	
@@ -44,6 +44,7 @@ xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/works
 mpv /opt/anapmi/oldkernel.mp3
 xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 sudo cp -R /opt/drivers/rtl8188eu /opt/drivers/rtl8188eutemp
+sudo chmod -R 777 /opt/drivers/rtl8188eutemp
 pushd /opt/drivers/rtl8188eutemp
 make
 sudo make install
