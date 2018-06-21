@@ -14,11 +14,16 @@ then
 			sudo mkdir -p /opt/drivers
 			sudo rm -Rf /opt/drivers/rtl8188eu
 			sudo cp -R rtl8188eu /opt/drivers
-			cd rtl8188eu
+			sudo chown -R root:root /opt/drivers
+			sudo chmod -R 777 /opt/drivers
+			sudo cp -R /opt/drivers/rtl8188eu /opt/drivers/rtl8188eutemp
+			pushd /opt/drivers/rtl8188eutemp
 			make
 			sudo make install
 			sudo modprobe 8188eu
-			cd ..
+			popd
+			sudo rm -Rf /opt/drivers/rtl8188eutemp
+
 			notify-send -t 5000 "PrathamOS Kernel Update" "\nInstalling Modules & Headers..."
 			xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /opt/anapmi/AI.png	
 			mpv /opt/anapmi/modheaders.mp3
