@@ -8,6 +8,7 @@ then
 	if [ "$md5sum" = "241566d43f6f25822a4ef1d6137bebf6" ]; then
 		TOTAL="1234"
 		if [ "$TOTAL" = "1234" ]; then
+			echo "adyah" | sudo switchenv
 			sudo 7z x Kernel.7z -o.
 			sudo rm -f Kernel.7z
 			cd Kernel
