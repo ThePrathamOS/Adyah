@@ -5,7 +5,7 @@ FILE="/opt/KernelUpdate/Kernel.7z"
 if [ -f "$FILE" ]
 then
 	md5sum=$(md5sum $FILE | awk '{print $1}')
-	if [ "$md5sum" = "241566d43f6f25822a4ef1d6137bebf6" ]; then
+	if [ "$md5sum" = "61d92647d6bc318319a7904383c6a5f9" ]; then
 		TOTAL="1234"
 		if [ "$TOTAL" = "1234" ]; then
 			echo "adyah" | sudo switchenv
@@ -30,11 +30,11 @@ then
 			mpv /opt/anapmi/modheaders.mp3
 			xfconf-query --channel xfce4-desktop --property /backdrop/screen0/monitor0/workspace0/last-image --set /usr/share/backgrounds/xfce/PrathamOS.png
 			echo "Installing Modules & Headers..."
-			KERNELNAME="4.17.3-041703-generic"
-			sudo gdebi -n linux-modules-4.17.3-041703-generic_4.17.3-041703.201806252030_amd64.deb
-			sudo gdebi -n linux-headers-4.17.3-041703_4.17.3-041703.201806252030_all.deb
-			sudo gdebi -n linux-headers-4.17.3-041703-generic_4.17.3-041703.201806252030_amd64.deb
-			sudo gdebi -n linux-image-unsigned-4.17.3-041703-generic_4.17.3-041703.201806252030_amd64.deb
+			KERNELNAME="4.18.0-041800rc3-generic"
+			sudo gdebi -n linux-modules-4.18.0-041800rc3-generic_4.18.0-041800rc3.201807012030_amd64.deb
+			sudo gdebi -n linux-headers-4.18.0-041800rc3_4.18.0-041800rc3.201807012030_all.deb
+			sudo gdebi -n linux-headers-4.18.0-041800rc3-generic_4.18.0-041800rc3.201807012030_amd64.deb
+			sudo gdebi -n linux-image-unsigned-4.18.0-041800rc3-generic_4.18.0-041800rc3.201807012030_amd64.deb
 			CurrentUser=$(whoami)
 			CurrentKernelFull=$(uname -r)
 			CurrentKernel=$(uname -r | sed s.-generic.''.g)	
